@@ -107,7 +107,7 @@ describe('Lottery Contract', () => {
         const playas = await lottery.methods.getPlayers().call();
         assert.equal(0, playas.length);
 
-        //Check that Contract balance is 0 in new lottery round
+        //Check that Contract balance is 0 in new lottery round 
         const bal = await lottery.methods.prizePool().call();
         assert.equal(0, bal);
     });

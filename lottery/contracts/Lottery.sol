@@ -12,14 +12,13 @@ contract Lottery {
     function enter() public payable {
         require(msg.value > .01 ether);//Global variable: is used for validation, boolean function, 
                                        //if it returns false it is immediatly canceled
-        players.push(msg.sender);
+        players.push(msg.sender); 
     }
     //pseudo random
     function random() private view returns(uint) {
         return uint(keccak256(block.difficulty, now, players)); //Sha3(), keccak256() are the same thing and are global variables
                                               // block is also global variable also variable now to get an alias for block.timestamp
     }   
-    
     function pickWinner() public restricted {
         // require(msg.sender == manager); //only the manager can use this function
         
