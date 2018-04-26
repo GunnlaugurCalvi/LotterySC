@@ -70,8 +70,25 @@ describe('Lottery Contract', () => {
         catch (err) {
             assert(err);       
         }
-
-        
     });
-    
+
+    //tests our function modifier in our Contract
+    it('only manager can call pickWinner', async () => {
+        try {
+            await lottery.methods.pickWinner().send({
+                from: accounts[1] //not the manager accounts[1]
+            });
+            assert(false);
+        } 
+        catch (err) {
+            assert(err);    
+        }
+   });
+
+   it('sends money to the winner and resets the players array', async () => {
+        await lottery.methods.enter().send({
+            from: accounts[0],
+            value: web3.utils.toWei('2', 'ether')
+        })
+   });
 });
