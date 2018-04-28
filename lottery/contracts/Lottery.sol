@@ -4,6 +4,7 @@ contract Lottery {
     
     address public manager;
     address[] public players;
+    address public lastWinner;
     
     constructor() public {
         manager = msg.sender;    
@@ -24,7 +25,7 @@ contract Lottery {
         
         uint index = random() % players.length;
         players[index].transfer(address(this).balance);
-    
+        lastWinner = players[index];
         players = new address[](0); //creates brand new dynamic array of addresses
                                     //to reset the lottery after picking a winner
     }
